@@ -203,12 +203,6 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         iv_func_btn_main = (ImageView) findViewById(R.id.iv_func_btn_main);
         iv_func_btn_done = (ImageView) findViewById(R.id.iv_func_btn_done);
         img_add = findViewById(R.id.img_add);
-        img_add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBottomDialog();
-            }
-        });
         btn_start = (Button)findViewById(R.id.btn_start);
 
         tv_main_title.setText("行程规划");
@@ -218,6 +212,8 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 if(itemCnt >= 0){
+                    img_add.setVisibility(View.GONE);
+                    btn_start.setVisibility(View.GONE);
                     iv_func_btn_main.setVisibility(View.GONE);
                     iv_func_btn_done.setVisibility(View.VISIBLE);
                     for(ImageView i : delImgItems){
@@ -232,6 +228,8 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         iv_func_btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                img_add.setVisibility(View.VISIBLE);
+                btn_start.setVisibility(View.VISIBLE);
                 iv_func_btn_main.setVisibility(View.VISIBLE);
                 iv_func_btn_done.setVisibility(View.GONE);
                 for(ImageView i : delImgItems){
@@ -246,6 +244,13 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        img_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomDialog();
             }
         });
 
