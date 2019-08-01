@@ -9,7 +9,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar_main" /><!--引入标题栏-->
+    <include layout="@layout/title_bar_default" /><!--引入标题栏-->
 
     <LinearLayout
         android:layout_width="match_parent"
