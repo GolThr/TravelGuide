@@ -88,7 +88,7 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         i++;
         //RelativeLayout
         RelativeLayout relativeLayout = new RelativeLayout(this);
-        LinearLayout.LayoutParams relativeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110);
+        LinearLayout.LayoutParams relativeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
         relativeLayout.setGravity(Gravity.CENTER);
         relativeLayout.setBackground(getResources().getDrawable(R.drawable.back_card));
 
@@ -102,31 +102,32 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         TextView tv_city = new TextView(this);
         LinearLayout.LayoutParams cityParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         tv_city.setText(city);
-        cityParams.setMargins(5,0,5,0);
+        cityParams.setMargins(14,0,14,0);
         tv_city.setTextSize(20);
 
 
         //AttractionText
         TextView tv_attractions = new TextView(this);
         LinearLayout.LayoutParams attractionsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        attractionsParams.setMargins(5,10,5,0);
+        attractionsParams.setMargins(14,27,14,0);
         tv_attractions.setText(attraction);
         tv_attractions.setTextSize(16);
 
 
         //ImageView
         ImageView iv_delete = new ImageView(this);
-        RelativeLayout.LayoutParams imageViewParams = new RelativeLayout.LayoutParams(20, ViewGroup.LayoutParams.MATCH_PARENT);
+        RelativeLayout.LayoutParams imageViewParams = new RelativeLayout.LayoutParams(60, 60);
         imageViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        relativeLayout.setBackground(getResources().getDrawable(R.drawable.ic_delete));
+        imageViewParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         iv_delete.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+        iv_delete.setBackground(getResources().getDrawable(R.drawable.ic_delete));
 
 
         //addView
         linearLayout.addView(tv_city, cityParams);
         linearLayout.addView(tv_attractions, attractionsParams);
         relativeLayout.addView(linearLayout, linearLayoutParams);
-//        relativeLayout.addView(iv_delete, imageViewParams);
+        relativeLayout.addView(iv_delete, imageViewParams);
         my_layout.addView(relativeLayout, relativeLayoutParams);
     }
 
