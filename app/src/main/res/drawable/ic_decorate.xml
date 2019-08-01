@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="128dp"
+    android:height="128dp"
+    android:viewportHeight="128"
+    android:viewportWidth="128">
+    <path android:fillColor="#ffc323"
+        android:pathData="M 63.00,119.00
+           C 63.00,119.00 65.00,119.00 65.00,119.00
+             65.00,119.00 89.34,83.00 89.34,83.00
+             97.02,71.72 102.78,64.23 103.82,50.00
+             104.03,47.01 103.54,44.91 103.13,42.00
+             98.65,10.07 62.72,-3.63 38.04,16.67
+             34.15,19.87 30.50,24.45 28.33,29.00
+             17.04,52.60 28.99,69.16 41.98,88.00
+             41.98,88.00 63.00,119.00 63.00,119.00 Z"/>
+</vector>
