@@ -30,6 +30,11 @@ import java.io.IOException;
 public class PublishActivity extends AppCompatActivity {
     private ImageView im_more;
 
+    //head
+    private ImageView iv_func_btn_main;
+    private TextView tv_main_title;
+    private TextView tv_func;
+
     //Dialog
     private TextView tv_take_photo;
     private TextView tv_gallery;
@@ -53,8 +58,15 @@ public class PublishActivity extends AppCompatActivity {
             }
         });
 
-        Button publish=(Button) findViewById(R.id.publish);
-        publish.setOnClickListener(new View.OnClickListener() {
+        iv_func_btn_main = (ImageView)findViewById(R.id.iv_func_btn_main);
+        tv_main_title = (TextView)findViewById(R.id.tv_main_title);
+        tv_func = (TextView)findViewById(R.id.tv_func);
+        iv_func_btn_main.setVisibility(View.GONE);
+        tv_func.setVisibility(View.VISIBLE);
+        tv_main_title.setText("发布攻略");
+        tv_func.setText("发布");
+
+        tv_func.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(PublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
