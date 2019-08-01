@@ -1,6 +1,7 @@
 package com.golthr.travelguide;
 
 import android.app.Dialog;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -28,13 +29,16 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
     //title
     private ImageView iv_back_btn;
     private TextView tv_main_title;
+    private ImageView iv_func_btn_main;
+    private ImageView iv_func_btn_done;
 
     private static final String TAG = "MainActivity";
     private ImageView img_add;
-    private int i=-1;
+    private int itemCnt=-1;
     private LinearLayout my_layout;
     private EditText editText1;
-    private ArrayList<EditText> editTexts;
+    private ArrayList<RelativeLayout> spotItems;
+    private ArrayList<ImageView> delImgItems;
     private Button btn_start;
 
     //Dialog
@@ -48,7 +52,8 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
-        editTexts = new ArrayList<>();
+        spotItems = new ArrayList<>();
+        delImgItems = new ArrayList<>();
         initView();
 
     }
@@ -85,7 +90,7 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
             attraction = "推荐景区";
         }
         my_layout = findViewById(R.id.My_layout);
-        i++;
+        itemCnt++;
         //RelativeLayout
         RelativeLayout relativeLayout = new RelativeLayout(this);
         LinearLayout.LayoutParams relativeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 300);
@@ -121,6 +126,9 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         imageViewParams.addRule(RelativeLayout.CENTER_IN_PARENT);
         iv_delete.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
         iv_delete.setBackground(getResources().getDrawable(R.drawable.ic_delete));
+        iv_delete.setId(itemCnt);
+        iv_delete.setVisibility(View.GONE);
+        iv_delete.setOnClickListener(this);
 
 
         //addView
@@ -129,15 +137,18 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
         relativeLayout.addView(linearLayout, linearLayoutParams);
         relativeLayout.addView(iv_delete, imageViewParams);
         my_layout.addView(relativeLayout, relativeLayoutParams);
+        spotItems.add(relativeLayout);
+        delImgItems.add(iv_delete);
     }
 
 
-    public void deleteView() {
-        EditText editText = editTexts.get(i);
-        my_layout.removeView(editText);
-        editTexts.remove(i);
-        i--;
-        Log.d(TAG, "deleteView: --------"+i);
+    public void deleteView(int id) {
+        RelativeLayout item = spotItems.get(id);
+        my_layout.removeView(item);
+        spotItems.remove(id);
+        delImgItems.remove(id);
+        itemCnt--;
+        Log.d(TAG, "deleteView: --------"+itemCnt);
     }
 
     private void showBottomDialog() {
@@ -189,17 +200,55 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
     private void initView() {
         iv_back_btn = (ImageView)findViewById(R.id.iv_back_btn);
         tv_main_title = (TextView) findViewById(R.id.tv_main_title);
+        iv_func_btn_main = (ImageView) findViewById(R.id.iv_func_btn_main);
+        iv_func_btn_done = (ImageView) findViewById(R.id.iv_func_btn_done);
         img_add = findViewById(R.id.img_add);
-        img_add.setOnClickListener(this);
+        img_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomDialog();
+            }
+        });
         btn_start = (Button)findViewById(R.id.btn_start);
 
         tv_main_title.setText("行程规划");
+        iv_func_btn_main.setImageDrawable(getResources().getDrawable(R.drawable.ic_edit));
+
+        iv_func_btn_main.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(itemCnt >= 0){
+                    iv_func_btn_main.setVisibility(View.GONE);
+                    iv_func_btn_done.setVisibility(View.VISIBLE);
+                    for(ImageView i : delImgItems){
+                        if(i != null){
+                            i.setVisibility(View.VISIBLE);
+                        }
+                    }
+                }
+            }
+        });
+
+        iv_func_btn_done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iv_func_btn_main.setVisibility(View.VISIBLE);
+                iv_func_btn_done.setVisibility(View.GONE);
+                for(ImageView i : delImgItems){
+                    if(i != null){
+                        i.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
+
         iv_back_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+
         //开始规划
         btn_start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -212,10 +261,6 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.img_add:
-                showBottomDialog();
-                break;
-        }
+        deleteView(view.getId());
     }
 }
