@@ -15,6 +15,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,31 +53,81 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
 
     }
 
+//    public void addView(String city, String attraction, boolean isSuggest){
+//        if(isSuggest){
+//            attraction = "推荐景区";
+//        }
+//        my_layout = findViewById(R.id.My_layout);
+//        LinearLayout linearLayout = new LinearLayout(this);
+//        i++;
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        layoutParams.setMargins(0,5,0,5);
+//        LinearLayout.LayoutParams cityParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        cityParams.setMargins(5,0,5,0);
+//        LinearLayout.LayoutParams attractionsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        attractionsParams.setMargins(5,10,5,0);
+//        linearLayout.setOrientation(LinearLayout.VERTICAL);
+//        linearLayout.setGravity(Gravity.CENTER);
+//        linearLayout.setBackground(getResources().getDrawable(R.drawable.back_card));
+//        TextView tv_city = new TextView(this);
+//        TextView tv_attractions = new TextView(this);
+//        tv_city.setText(city);
+//        tv_city.setTextSize(20);
+//        tv_attractions.setText(attraction);
+//        tv_attractions.setTextSize(16);
+//        linearLayout.addView(tv_city, cityParams);
+//        linearLayout.addView(tv_attractions, attractionsParams);
+//        my_layout.addView(linearLayout, layoutParams);
+//    }
+
     public void addView(String city, String attraction, boolean isSuggest){
         if(isSuggest){
             attraction = "推荐景区";
         }
         my_layout = findViewById(R.id.My_layout);
-        LinearLayout linearLayout = new LinearLayout(this);
         i++;
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        layoutParams.setMargins(0,5,0,5);
+        //RelativeLayout
+        RelativeLayout relativeLayout = new RelativeLayout(this);
+        LinearLayout.LayoutParams relativeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 110);
+        relativeLayout.setGravity(Gravity.CENTER);
+        relativeLayout.setBackground(getResources().getDrawable(R.drawable.back_card));
+
+        //LinearLayout
+        LinearLayout linearLayout = new LinearLayout(this);
+        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        linearLayout.setGravity(Gravity.CENTER);
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        //CityText
+        TextView tv_city = new TextView(this);
         LinearLayout.LayoutParams cityParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        tv_city.setText(city);
         cityParams.setMargins(5,0,5,0);
+        tv_city.setTextSize(20);
+
+
+        //AttractionText
+        TextView tv_attractions = new TextView(this);
         LinearLayout.LayoutParams attractionsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         attractionsParams.setMargins(5,10,5,0);
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setGravity(Gravity.CENTER);
-        linearLayout.setBackground(getResources().getDrawable(R.drawable.back_card));
-        TextView tv_city = new TextView(this);
-        TextView tv_attractions = new TextView(this);
-        tv_city.setText(city);
-        tv_city.setTextSize(20);
         tv_attractions.setText(attraction);
         tv_attractions.setTextSize(16);
+
+
+        //ImageView
+        ImageView iv_delete = new ImageView(this);
+        RelativeLayout.LayoutParams imageViewParams = new RelativeLayout.LayoutParams(20, ViewGroup.LayoutParams.MATCH_PARENT);
+        imageViewParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        relativeLayout.setBackground(getResources().getDrawable(R.drawable.ic_delete));
+        iv_delete.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+
+
+        //addView
         linearLayout.addView(tv_city, cityParams);
         linearLayout.addView(tv_attractions, attractionsParams);
-        my_layout.addView(linearLayout, layoutParams);
+        relativeLayout.addView(linearLayout, linearLayoutParams);
+//        relativeLayout.addView(iv_delete, imageViewParams);
+        my_layout.addView(relativeLayout, relativeLayoutParams);
     }
 
 

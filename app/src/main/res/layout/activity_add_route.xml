@@ -48,29 +48,41 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp">
 
-                        <!--<LinearLayout-->
-                            <!--android:layout_width="match_parent"-->
-                            <!--android:layout_height="wrap_content"-->
-                            <!--android:orientation="vertical"-->
-                            <!--android:gravity="center"-->
-                            <!--android:background="@drawable/back_card">-->
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="青岛"-->
-                                <!--android:layout_marginLeft="5dp"-->
-                                <!--android:layout_marginRight="5dp"-->
-                                <!--android:textSize="20sp" />-->
-                            <!--<TextView-->
-                                <!--android:layout_width="match_parent"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:layout_marginTop="10dp"-->
-                                <!--android:text="推荐"-->
-                                <!--android:layout_marginLeft="5dp"-->
-                                <!--android:layout_marginRight="5dp"-->
-                                <!--android:textSize="16sp" />-->
-                        <!--</LinearLayout>-->
+                        
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="110dp"
+                            android:gravity="center"
+                            android:background="@drawable/back_card">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="青岛"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="20sp" />
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="10dp"
+                                    android:text="推荐"
+                                    android:layout_marginLeft="5dp"
+                                    android:layout_marginRight="5dp"
+                                    android:textSize="16sp" />
+                            </LinearLayout>
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="match_parent"
+                                android:layout_alignParentRight="true"
+                                android:src="@drawable/ic_delete"/>
+                        </RelativeLayout>
 
+                        
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
