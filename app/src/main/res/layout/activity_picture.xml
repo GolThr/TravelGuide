@@ -4,39 +4,7 @@
     android:layout_height="match_parent"
     tools:context=".PictureActivity" >
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#ffffff">
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/im_back"
-            android:background="@drawable/ic_back"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="40dp"
-            android:text="更换头像"
-            android:textSize="20sp" />
-
-        <ImageView
-            android:id="@+id/im_more"
-            android:layout_width="30dp"
-            android:layout_height="20dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/ic_tb_more" />
-
-    </RelativeLayout>
+    <include layout="@layout/title_bar_default"/>
 
     <ImageView
         android:id="@+id/iv_head"

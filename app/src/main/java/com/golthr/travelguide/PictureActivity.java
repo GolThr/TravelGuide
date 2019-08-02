@@ -27,6 +27,8 @@ import java.io.IOException;
 
 public class PictureActivity extends AppCompatActivity {
     private ImageView im_more;
+    private ImageView im_back;
+    private TextView tv_title;
 
     //Dialog
     private TextView tv_take_photo;
@@ -44,7 +46,17 @@ public class PictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture);
         initView();
 
-        im_more = (ImageView)findViewById(R.id.im_more);
+        im_back = (ImageView)findViewById(R.id.iv_back_btn);
+        im_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+        tv_title = (TextView)findViewById(R.id.tv_main_title);
+        tv_title.setText("更换头像");
+        im_more = (ImageView)findViewById(R.id.iv_func_btn_main);
+        im_more.setImageDrawable(getResources().getDrawable(R.drawable.ic_tb_more));
         im_more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

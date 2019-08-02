@@ -4,53 +4,35 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@color/white">
+    <include layout="@layout/title_bar_default"/>
 
-        <ImageView
-            android:id="@+id/im_back"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_back"/>
-        <TextView
-            android:id="@+id/tx"
-            android:layout_width="298dp"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="编辑资料"
-            android:textSize="20sp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/white"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp">
 
         <TextView
             android:id="@+id/my_picture1"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="  我的头像"
-            android:textSize="20dp" />
-
+            android:layout_marginLeft="10dp"
+            android:text="我的头像"
+            android:textSize="15sp"
+            android:textColor="@color/blackView"/>
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="200dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:src="@drawable/g3" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/l2"
@@ -62,18 +44,22 @@
 
         <TextView
             android:id="@+id/my_picture2"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="  姓名"
-            android:textSize="20dp" />
+            android:layout_marginLeft="10dp"
+            android:text="姓名"
+            android:textSize="15sp"
+            android:textColor="@color/blackView"/>
 
         <EditText
             android:id="@+id/et1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="沈长盈"
+            android:textSize="15sp"
+            android:textColor="@color/blackView"
             android:background="@null"/>
 
     </LinearLayout>
@@ -88,36 +74,36 @@
 
         <TextView
             android:id="@+id/my_picture3"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="  性别"
-            android:textSize="20dp" />
+            android:layout_marginLeft="10dp"
+            android:text="性别"
+            android:textSize="15sp"
+            android:textColor="@color/blackView" />
 
         <RadioGroup
             android:id="@+id/rg"
-            android:layout_width="150dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:checked="true"
                 android:text="男"
-                android:textSize="18sp" />
+                android:textSize="15sp"
+                android:textColor="@color/blackView" />
             <RadioButton
                 android:id="@+id/femle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:checked="true"
                 android:text="女"
-                android:textSize="18sp" />
+                android:textSize="15sp"
+                android:textColor="@color/blackView" />
         </RadioGroup>
 
     </LinearLayout>
@@ -132,18 +118,21 @@
 
         <TextView
             android:id="@+id/my_picture4"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="  邮箱"
-            android:textSize="20dp" />
+            android:layout_marginLeft="10dp"
+            android:text="邮箱"
+            android:textSize="15sp"
+            android:textColor="@color/blackView" />
 
         <EditText
             android:id="@+id/et2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="13127095525"
+            android:textSize="15sp"
+            android:textColor="@color/blackView"
             android:background="@null"/>
 
 
@@ -159,23 +148,27 @@
 
         <TextView
             android:id="@+id/my_picture5"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
-            android:text="  地址"
-            android:textSize="20dp" />
+            android:layout_marginLeft="10dp"
+            android:text="地址"
+            android:textSize="15sp"
+            android:textColor="@color/blackView" />
 
         <EditText
             android:id="@+id/et3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="山东省临沂市"
+            android:textSize="15sp"
+            android:textColor="@color/blackView"
             android:background="@null"/>
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/l6"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -185,23 +178,26 @@
 
         <TextView
             android:id="@+id/my_picture6"
-            android:layout_width="120dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:gravity="center_vertical"
-            android:text="  修改密码"
-            android:textSize="20dp" />
+            android:text="修改密码"
+            android:textSize="15sp"
+            android:textColor="@color/blackView" />
 
 
         <ImageView
             android:id="@+id/modify_pwd"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="200dp"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:src="@drawable/g3" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
     <LinearLayout
@@ -212,14 +208,14 @@
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="150dp"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/back_button_main"
             android:text="确 认"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"/>
+            android:textColor="@android:color/black"
+            android:textSize="15sp"/>
     </LinearLayout>
 
 </LinearLayout>
