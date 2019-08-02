@@ -74,7 +74,7 @@ public class InformationActivity extends AppCompatActivity {
         Window window = bottomDialog.getWindow();
         et_old = (EditText)window.findViewById(R.id.et_old);
         et_new = (EditText)window.findViewById(R.id.et_new);
-        et_repassword = (EditText)window.findViewById(R.id.edit_repassword);
+        et_repassword = (EditText)window.findViewById(R.id.et_repassword);
         btn_change = (Button)window.findViewById(R.id.btn_change);
 
         btn_change.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,9 @@ public class InformationActivity extends AppCompatActivity {
                 String newP = et_new.getText().toString();
                 String reP = et_repassword.getText().toString();
 
-                if(newP.equals(oldP)){
+                if(oldP.isEmpty() || newP.isEmpty() || reP.isEmpty()){
+                    Toast.makeText(InformationActivity.this, "密码不能为空！", Toast.LENGTH_SHORT).show();
+                }else if(newP.equals(oldP)){
                     Toast.makeText(InformationActivity.this, "新密码与旧密码相同！", Toast.LENGTH_SHORT).show();
                 } else if(!reP.equals(newP)){
                     Toast.makeText(InformationActivity.this, "两次密码输入不一致！", Toast.LENGTH_SHORT).show();
