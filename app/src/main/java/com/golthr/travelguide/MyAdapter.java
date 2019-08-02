@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     private Context mcontext;
     public MyAdapter(){}
     public MyAdapter(Context context, List<Student> students) {
-       this.mcontext=context;
+        this.mcontext=context;
         this.students=students;
     }
 //创建viewHolder
@@ -30,6 +31,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         public ImageView imageView;
         public TextView word;
         public TextView time;
+        public LinearLayout ll_card_item;
 
 
         public ViewHolder( View v ) {
@@ -38,6 +40,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             name = (TextView) v.findViewById(R.id.name);
             word = (TextView) v.findViewById(R.id.word);
             time = (TextView) v.findViewById(R.id.time);
+            ll_card_item = (LinearLayout) v.findViewById(R.id.ll_card_item);
         }
     }
 //创建ViewHolder
@@ -48,7 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
         }
         View v = LayoutInflater.from(mcontext).inflate(R.layout.recyclerview_item, viewGroup, false);
         final ViewHolder holder=new ViewHolder(v);
-        holder.word.setOnClickListener(new View.OnClickListener() {
+        holder.ll_card_item.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int position=holder.getAdapterPosition();
