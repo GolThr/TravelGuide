@@ -6,12 +6,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -214,11 +217,18 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomDialog.hide();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    // 在拍照的时候没有这个 会  闪   退！！！！！
+                    StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+                    StrictMode.setVmPolicy(builder.build());
+                    // 不能删 不能删 不能删  上香   \ | /
+                }
                 //最好用try/catch包裹一下，防止因为用户未给应用程序开启相机权限，而使程序崩溃
                 try {
                     Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//开启相机应用程序获取并返回图片（capture：俘获）
-                    intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+                    intent2.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment.getExternalStorageDirectory().getPath()+
                             "head.jpg")));//指明存储图片或视频的地址URI
+                    Log.d("aa", Environment.getExternalStorageDirectory().getPath());
                     startActivityForResult(intent2, 2);//采用ForResult打开
                 } catch (Exception e) {
                     Toast.makeText(PictureActivity.this, "相机无法启动，请先开启相机权限", Toast.LENGTH_LONG).show();
