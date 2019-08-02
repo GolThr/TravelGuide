@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 public class YinsiActivity extends AppCompatActivity {
@@ -13,12 +14,14 @@ public class YinsiActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_yinsi);
-        ImageView img=(ImageView)findViewById(R.id.im_back);
+        ImageView img=(ImageView)findViewById(R.id.iv_back_btn);
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
             }
         });
+        TextView tv_title = (TextView)findViewById(R.id.tv_main_title);
+        tv_title.setText("隐私");
     }
 }

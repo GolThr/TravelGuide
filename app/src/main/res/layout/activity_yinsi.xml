@@ -4,30 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#ffffff"
-        >
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:id="@+id/im_back"
-            android:background="@drawable/ic_back"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="隐私"
-            android:textSize="20sp"
-            />
+    <include layout="@layout/title_bar_default"/>
 
-    </LinearLayout>
     <RelativeLayout
         android:id="@+id/r1"
         android:layout_width="match_parent"
@@ -43,7 +21,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  允许推送我的攻略"
-            android:textSize="20dp" />
+            android:textSize="15sp" />
 
         <Switch
             android:id="@+id/sw_switch1"
@@ -73,7 +51,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  授权管理"
-            android:textSize="20dp" />
+            android:textSize="15sp" />
 
         <ImageView
             android:id="@+id/img2"

@@ -4,30 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:background="#ffffff"
-        >
-        <ImageView
-            android:id="@+id/im_back"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:background="@drawable/ic_back"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
-            android:text="通用"
-            android:textSize="20sp"
-            />
-
-    </LinearLayout>
+    <include layout="@layout/title_bar_default"/>
 
     <RelativeLayout
         android:id="@+id/r1"
@@ -44,7 +21,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  摇动手机截屏"
-            android:textSize="20dp" />
+            android:textSize="15sp" />
 
         <Switch
             android:id="@+id/sw_switch1"
@@ -74,7 +51,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  非Wi-Fi环境下自动加载图片"
-            android:textSize="20dp" />
+            android:textSize="15sp"/>
         <Switch
             android:id="@+id/sw_switch2"
             android:layout_width="wrap_content"
@@ -103,7 +80,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  Wi-Fi下自动在后台下载新版本"
-            android:textSize="20dp" />
+            android:textSize="15sp" />
 
         <Switch
             android:id="@+id/sw_switch3"
@@ -133,7 +110,7 @@
             android:layout_alignParentLeft="true"
             android:gravity="center_vertical"
             android:text="  系统通知栏显示图标"
-            android:textSize="20dp" />
+            android:textSize="15sp" />
 
 
         <Switch
