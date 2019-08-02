@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,13 +24,15 @@ public class FootActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview);
-        ImageView imageView=(ImageView)findViewById(R.id.backToMain);
-         imageView.setOnClickListener(new View.OnClickListener() {
+        ImageView imageView=(ImageView)findViewById(R.id.iv_back_btn);
+        imageView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View v) {
                  finish();
              }
          });
+        TextView tv_title = (TextView) findViewById(R.id.tv_main_title);
+        tv_title.setText("我的足迹");
 //        students = new ArrayList<Student>();
 //        students.add(new Student(R.drawable.about2,"100", "Cindy", "2019-1-1"));
 //        students.add(new Student(R.drawable.banana_pic,"101", "Lisa", "2019-1-1"));

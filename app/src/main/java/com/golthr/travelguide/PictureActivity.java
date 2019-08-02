@@ -1,5 +1,6 @@
 package com.golthr.travelguide;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,6 +27,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
 public class PictureActivity extends AppCompatActivity {
     private ImageView im_more;
@@ -64,6 +69,7 @@ public class PictureActivity extends AppCompatActivity {
             }
         });
     }
+
     private void initView() {
         ivHead = (ImageView) findViewById(R.id.iv_head);
 
@@ -188,6 +194,9 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomDialog.hide();
+                if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                }
                 Intent intent1 = new Intent(Intent.ACTION_PICK, null);//返回被选中项的URI
                 intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");//得到所有图片的URI
                 //                System.out.println("MediaStore.Images.Media.EXTERNAL_CONTENT_URI  ------------>   "
@@ -199,6 +208,9 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomDialog.hide();
+                if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+                }
                 //最好用try/catch包裹一下，防止因为用户未给应用程序开启相机权限，而使程序崩溃
                 try {
                     Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//开启相机应用程序获取并返回图片（capture：俘获）
