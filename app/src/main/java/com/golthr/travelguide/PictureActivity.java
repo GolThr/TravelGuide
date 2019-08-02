@@ -73,6 +73,15 @@ public class PictureActivity extends AppCompatActivity {
     private void initView() {
         ivHead = (ImageView) findViewById(R.id.iv_head);
 
+
+        if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+        }
+
+        if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+        }
+
         Bitmap bt = BitmapFactory.decodeFile(path + "head.jpg");//从Sd中找头像，转换成Bitmap
         if (bt != null) {
             //如果本地有头像图片的话
@@ -194,9 +203,6 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomDialog.hide();
-                if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                }
                 Intent intent1 = new Intent(Intent.ACTION_PICK, null);//返回被选中项的URI
                 intent1.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");//得到所有图片的URI
                 //                System.out.println("MediaStore.Images.Media.EXTERNAL_CONTENT_URI  ------------>   "
@@ -208,9 +214,6 @@ public class PictureActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 bottomDialog.hide();
-                if (ContextCompat.checkSelfPermission(PictureActivity.this, Manifest.permission.CAMERA) != PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(PictureActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
-                }
                 //最好用try/catch包裹一下，防止因为用户未给应用程序开启相机权限，而使程序崩溃
                 try {
                     Intent intent2 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);//开启相机应用程序获取并返回图片（capture：俘获）
