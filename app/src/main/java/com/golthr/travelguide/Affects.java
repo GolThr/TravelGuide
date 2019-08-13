@@ -7,7 +7,10 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class GetImmersive {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Affects {
     public static void Immersive(Activity activity){
         Window window = activity.getWindow();
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){//6.0 以全透明状态栏
@@ -22,5 +25,17 @@ public class GetImmersive {
             window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
             window.setStatusBarColor(Color.TRANSPARENT);
         }
+    }
+
+    public static boolean checkEmail(String email){
+        String mailRegex,mailName,mailDomain;
+        Pattern pattern;
+        Matcher matcher;
+        mailName="^[0-9a-z]+\\w*";
+        mailDomain="([0-9a-z]+\\.)+[0-9a-z]+$";
+        mailRegex=mailName+"@"+mailDomain;
+        pattern= Pattern.compile(mailRegex);
+        matcher=pattern.matcher(email);
+        return matcher.matches();
     }
 }

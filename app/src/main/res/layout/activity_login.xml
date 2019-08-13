@@ -26,8 +26,8 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="60dp"
-            android:hint="请输入手机号"
-            android:inputType="number|numberDecimal"
+            android:hint="邮箱/账号"
+            android:inputType="textEmailAddress"
             android:paddingLeft="8dp"
             android:singleLine="true"
             android:textColor="#000000"
@@ -56,8 +56,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="25dp"
             android:background="@drawable/back_button_main"
-            android:text="登 录"
-            android:textColor="@android:color/white"
+            android:text="登录"
+            android:textColor="@android:color/black"
             android:textSize="18sp"/>
         <!--显示tv register , find_psw -->
     </LinearLayout>
