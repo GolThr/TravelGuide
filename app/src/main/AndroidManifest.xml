@@ -31,7 +31,7 @@
             android:value="c4e951b19e39c6895e253155685118bd"/>
         <activity android:name=".MainActivity">
         </activity>
-        <activity android:name=".FindBack">
+        <activity android:name=".FindBackActivity">
         </activity>
         <activity android:name=".Home">
         </activity>
