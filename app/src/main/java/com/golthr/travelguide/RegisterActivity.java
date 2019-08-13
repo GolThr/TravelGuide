@@ -24,7 +24,8 @@ import java.security.NoSuchAlgorithmException;
 public class RegisterActivity extends AppCompatActivity {
     private EditText et_username;
     private EditText et_pwd;
-    private EditText et_repwd;
+    private EditText et_rePWD;
+    private Button btn_register;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,15 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void initView() {
+        et_username = (EditText)findViewById(R.id.et_username);
+        et_pwd = (EditText)findViewById(R.id.et_pwd);
+        et_rePWD = (EditText)findViewById(R.id.et_rePWD);
+        btn_register = (Button)findViewById(R.id.btn_register);
 
+        //注册Bmob_register
+        //数据：用户名username，密码rePWD
+        String username = et_username.getText().toString().trim();
+        String password = et_pwd.getText().toString().trim();
+        String rePWD = et_rePWD.getText().toString().trim();
     }
 }

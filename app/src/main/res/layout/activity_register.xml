@@ -46,7 +46,7 @@
             android:textSize="14sp"
             android:background="@drawable/back_input" />
         <EditText
-            android:id="@+id/et_rePwd"
+            android:id="@+id/et_rePWD"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="25dp"

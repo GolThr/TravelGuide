@@ -2,23 +2,20 @@ package com.golthr.travelguide;
 //登录界面
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import cn.edu.gdmec.android.androidstudiodemo.utils.MD5Utils;
-//import android.support.v7.app.AppCompatActivity;
+import com.golthr.travelguide.obj.Person;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
+
 
 public class LoginActivity extends AppCompatActivity {
     private EditText et_username;
@@ -34,6 +31,8 @@ public class LoginActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Bmob.initialize(this, "523238cf6b514a3a71a3f0835c606f4e");
 
         initView();
     }
@@ -55,8 +54,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //登录
+                //登录Bmob_login_impl
                 //成功后跳转到MainActivity，并将用户信息保存到手机
+
             }
         });
 
