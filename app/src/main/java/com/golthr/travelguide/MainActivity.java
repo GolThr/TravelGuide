@@ -48,6 +48,8 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobUser;
+
 import static com.amap.api.maps.model.BitmapDescriptorFactory.getContext;
 
 public class MainActivity extends AppCompatActivity implements AMap.CancelableCallback, AMap.OnMyLocationChangeListener, GeocodeSearch.OnGeocodeSearchListener, IInterceptChecker, NavigationView.OnNavigationItemSelectedListener {
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.Immersive(MainActivity.this);
         super.onCreate(savedInstanceState);
         if(Build.VERSION.SDK_INT > 28
                 && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
@@ -295,6 +298,11 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
         } else if (id == R.id.nav_about) {
             Intent intent = new Intent(MainActivity.this,AboutActivity.class);
             startActivity(intent);
+        } else if (id == R.id.nav_logout) {
+            BmobUser.logOut();
+            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -313,6 +321,9 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.READ_PHONE_STATE,
+            Manifest.permission.INTERNET,
+            Manifest.permission.ACCESS_WIFI_STATE,
+            Manifest.permission.ACCESS_NETWORK_STATE,
             BACK_LOCATION_PERMISSION
     };
 

@@ -46,5 +46,6 @@
     <string name="menu_tools">我的发布</string>
     <string name="menu_share">应用设置</string>
     <string name="menu_send">关于我们</string>
+    <string name="menu_logout">退出登录</string>
 
 </resources>

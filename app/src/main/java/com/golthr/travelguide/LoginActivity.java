@@ -10,9 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.golthr.travelguide.obj.Person;
-
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -27,14 +26,21 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
-        GetImmersive.Immersive(LoginActivity.this);
+        Affects.Immersive(LoginActivity.this);
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         Bmob.initialize(this, "523238cf6b514a3a71a3f0835c606f4e");
 
-        initView();
+        if (BmobUser.isLogin()) {
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            initView();
+        }
+
     }
 
     //获取界面控件
@@ -48,15 +54,28 @@ public class LoginActivity extends AppCompatActivity {
 
         //登录Bmob_login
         //数据：用户名username，密码password
-        String username = et_username.getText().toString().trim();
-        String password = et_pwd.getText().toString().trim();
-        System.out.println("Bmob_login...");
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //登录Bmob_login_impl
-                //成功后跳转到MainActivity，并将用户信息保存到手机
-
+                String email = et_username.getText().toString().trim();
+                String password = et_pwd.getText().toString().trim();
+                System.out.println("Bmob_login...");
+                BmobUser userlogin = new BmobUser();
+                userlogin.setUsername(email);
+                userlogin.setPassword(password);
+                userlogin.login(new SaveListener<BmobUser>() {
+                    @Override
+                    public void done(BmobUser bmobUser, BmobException e) {
+                        if (e == null) {
+                            Toast.makeText(LoginActivity.this, bmobUser.getUsername() + "登录成功", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "用户名或密码错误", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 

@@ -20,9 +20,6 @@
             android:id="@+id/nav_fabu"
             android:icon="@drawable/ic_publish"
             android:title="@string/menu_tools" />
-    </group>
-
-    <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_setting"
             android:icon="@drawable/ic_setting"
@@ -31,6 +28,11 @@
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_about"
             android:title="@string/menu_send" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_logout"
+            android:title="@string/menu_logout" />
+
 
     </group>
 
