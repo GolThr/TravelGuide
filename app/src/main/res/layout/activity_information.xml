@@ -84,21 +84,21 @@
             android:textColor="@color/blackView" />
 
         <RadioGroup
-            android:id="@+id/rg"
+            android:id="@+id/rg_gender"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/male"
+                android:id="@+id/radio_male"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="男"
                 android:textSize="15sp"
                 android:textColor="@color/blackView" />
             <RadioButton
-                android:id="@+id/femle"
+                android:id="@+id/radio_femle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="女"

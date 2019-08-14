@@ -15,6 +15,7 @@ public class SettingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(SettingActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 

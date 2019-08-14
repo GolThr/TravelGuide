@@ -1,6 +1,5 @@
 package com.golthr.travelguide;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,16 +14,22 @@ public class FavoriteActivity extends AppCompatActivity {
 
     private MyAdapter adapter;
     private RecyclerView mRecyclerView;
-    Student[] students={new Student(R.drawable.about2,"100", "Cindy", "2019-1-1"),
-            new Student(R.drawable.banana_pic,"101", "Lisa", "2019-1-1"), new Student(R.drawable.banana_pic,"102323", "Lili","2019-1-1"),
-            new Student(R.drawable.banana_pic,"103", "Jack", "2019-1-1"),new Student(R.drawable.banana_pic,"121324", "Jim","2019-1-1"),
-            new Student(R.drawable.banana_pic,"108", "Tom","2019-1-1"),new Student(R.drawable.banana_pic,"1321421", "Mike","2019-1-1")};
-
+    private Article[] articles ={new Article(R.drawable.about2,"shaaa", "Cindy", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1dght01", "Lisa", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1023rtyh23", "Lili","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"10rht3", "Jack", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1rht21324", "Jim","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1hrd08", "Tom","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1rt321421", "Mike","2019-1-1", "100")};
     //数据源
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
+         Affects.setStatusBarFontBlack(FavoriteActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview);
+
+        //标题栏
         ImageView imageView=(ImageView)findViewById(R.id.iv_back_btn);
         imageView.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -34,45 +39,24 @@ public class FavoriteActivity extends AppCompatActivity {
          });
         TextView tv_title = (TextView)findViewById(R.id.tv_main_title);
         tv_title.setText("我的收藏");
-//        students = new ArrayList<Student>();
-//        students.add(new Student(R.drawable.about2,"100", "Cindy", "2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"101", "Lisa", "2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"102323", "Lili","2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"103", "Jack", "2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"121324", "Jim","2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"108", "Tom","2019-1-1"));
-//        students.add(new Student(R.drawable.banana_pic,"1321421", "Mike","2019-1-1"));
         mRecyclerView=(RecyclerView) findViewById(R.id.reclcler_view);
+
         initData();
-
-        // 设置LinearLayoutManager
-//       mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter=new MyAdapter(MainActivity.this,initData());
-
-        // 设置ItemAnimator
-//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        // 设置固定大小
-//        mRecyclerView.setHasFixedSize(true);
-        // 初始化自定义的适配器
-        // 为mRecyclerView设置适配器
-   //     mRecyclerView.setAdapter(adapter);
     }
-//public  ArrayList<Student> initData(){
-//    ArrayList<Student> studentList = new ArrayList<>();
-//    for (int j=0;j<students.length;j++){
-//        studentList.add(students[j]);
-//    }
-//
-//    return studentList;
-//}
-    public void initData(){
-        ArrayList<Student> studentList = new ArrayList<>();
-        for (int j=0;j<students.length;j++){
-            studentList.add(students[j]);
-        }
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter=new MyAdapter(FavoriteActivity.this,studentList);
 
+    public void initData(){
+        //获取所有收藏Bmob_getFavorite_impl
+        //数据：用户userId
+        //获取到该用户收藏的所有攻略的信息，并将每个攻略分别存成一个Article对象，存入下面的articleList列表中即可(数据需包括攻略图片1张，攻略标题，攻略简短介绍，攻略作者用户名，攻略发布时间和攻略id号)
+        //注意保存攻略id
+        ArrayList<Article> articleList = new ArrayList<>();
+        for (int j = 0; j< articles.length; j++){
+            articleList.add(articles[j]);
+        }
+        //////////////////
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter=new MyAdapter(FavoriteActivity.this, articleList);
         mRecyclerView.setAdapter(adapter);
     }
 

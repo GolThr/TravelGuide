@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,13 +36,17 @@ public class InformationActivity extends AppCompatActivity {
     private EditText et2;//邮箱
     private EditText et3;//地址
     private Button btn;//确认
-    String Et1,Et2,Et3;
+    private RadioGroup rg_gender;
+    private String Et1,Et2,Et3;
 
     final String name = (String) BmobUser.getObjectByKey("Name");
     final String email = (String) BmobUser.getObjectByKey("Phone");
     final String address = (String) BmobUser.getObjectByKey("Address");
+    private String gender = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(InformationActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
 
@@ -75,10 +81,27 @@ public class InformationActivity extends AppCompatActivity {
         et2=(EditText)findViewById(R.id.et2);
         et3=(EditText) findViewById(R.id.et3);
         btn=(Button)findViewById(R.id.btn_true);
+        rg_gender = (RadioGroup)findViewById(R.id.rg_gender);
 
         et1.setText(name);
         et2.setText(email);
         et3.setText(address);
+        rg_gender.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if(i == R.id.radio_male){
+                    gender = "男";
+                }else if(i == R.id.radio_femle){
+                    gender = "女";
+                }else {
+                    gender = "";
+                }
+            }
+        });
+
+
+        //修改资料Bmob_modifyInfo_impl
+        //数据：用户名Et1，性别gender，手机号Et2，地址Et3
         btn.setOnClickListener(new View.OnClickListener(){ //点击保存，数据传到数据库中。
             @Override
             public void onClick(View view) {
@@ -92,6 +115,9 @@ public class InformationActivity extends AppCompatActivity {
 //                }
                 if (Et1.equals("")) {
                     Toast.makeText(InformationActivity.this, "请输入姓名", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if(gender.equals("")){
+                    Toast.makeText(InformationActivity.this, "请选择性别", Toast.LENGTH_SHORT).show();
                     return;
                 } else if (Et2.equals("")) {
                     Toast.makeText(InformationActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
@@ -107,7 +133,7 @@ public class InformationActivity extends AppCompatActivity {
                     Inform inform=new Inform();
 
                     inform.setAddress(Et3);
-                    inform.setSex("女");
+                    inform.setSex(gender);
                     inform.setName(Et1);
                     inform.setPhone(Et2);
                     System.out.println(inform.getName());
@@ -116,7 +142,6 @@ public class InformationActivity extends AppCompatActivity {
                         @Override
                         public void done(BmobException e) {
                             if (e == null) {
-
                                 Toast.makeText(InformationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                             } else {
 
@@ -151,6 +176,8 @@ public class InformationActivity extends AppCompatActivity {
         btn_change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+                String userId = user.getObjectId();
                 String oldP = et_old.getText().toString();
                 String newP = et_new.getText().toString();
                 String reP = et_repassword.getText().toString();
@@ -162,6 +189,9 @@ public class InformationActivity extends AppCompatActivity {
                 } else if(!reP.equals(newP)){
                     Toast.makeText(InformationActivity.this, "两次密码输入不一致！", Toast.LENGTH_SHORT).show();
                 }else {
+                    //修改密码Bmob_modifyPWD_impl
+                    //数据：用户userId，旧密码oldPWD，新密码newPWD
+                    //若成功则运行下面两行代码，若旧密码错误则提示原密码错误
                     Toast.makeText(InformationActivity.this, "密码修改成功！", Toast.LENGTH_SHORT).show();
                     bottomDialog.hide();
                 }

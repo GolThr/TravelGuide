@@ -17,15 +17,16 @@ import java.util.List;
  */
 //适配器
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-    private List<Student> students;
+    private List<Article> articles;
     private int resourceId;
     private Context mcontext;
     public MyAdapter(){}
-    public MyAdapter(Context context, List<Student> students) {
+    public MyAdapter(Context context, List<Article> articles) {
         this.mcontext=context;
-        this.students=students;
+        this.articles = articles;
     }
-//创建viewHolder
+
+    //创建viewHolder
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
         public ImageView imageView;
@@ -43,7 +44,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             ll_card_item = (LinearLayout) v.findViewById(R.id.ll_card_item);
         }
     }
-//创建ViewHolder
+
+    //创建ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         if (mcontext==null){
@@ -55,11 +57,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
             @Override
             public void onClick(View v) {
                 int position=holder.getAdapterPosition();
-                Student student=students.get(position);
+                Article article = articles.get(position);
                 Intent intent=new Intent(mcontext,DetailActivity.class);
-                intent.putExtra(DetailActivity.NAME,student.getName());
-                intent.putExtra(DetailActivity.DETAIL,student.getWord());
-                intent.putExtra(DetailActivity.IMAGE_ID,student.getImageId());
+                intent.putExtra(DetailActivity.ARTICLE_ID, article.getArticle_id());
                 mcontext.startActivity(intent);
 
             }
@@ -70,16 +70,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
     //绑定数据
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        Student student = students.get(position);
-        viewHolder.imageView.setImageResource(student.getImageId());
-        viewHolder.name.setText(student.getName()+"  ");
-        viewHolder.word.setText(student.getName());
-        viewHolder.time.setText(student.getTime());
+        Article article = articles.get(position);
+        viewHolder.imageView.setImageResource(article.getImageId());
+        viewHolder.name.setText(article.getName()+"  ");
+        viewHolder.word.setText(article.getName());
+        viewHolder.time.setText(article.getTime());
 
     }
-//数据总数
+
+    //数据总数
     @Override
     public int getItemCount() {
-        return students.size();
+        return articles.size();
     }
 }

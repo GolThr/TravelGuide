@@ -50,6 +50,7 @@ public class AddRouteActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(AddRouteActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_route);
         spotItems = new ArrayList<>();

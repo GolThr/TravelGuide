@@ -13,31 +13,50 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 
 public class DetailActivity extends AppCompatActivity {
-    public static final String DETAIL="detail";
-    public static final String NAME="name";
-    public static final String IMAGE_ID="image_id";
+    public static final String ARTICLE_ID = "article_id";
+
+    String article_id = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.ImmersiveWhiteFont(DetailActivity.this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detail);
+        setContentView(R.layout.activity_detail);
+
         Intent intent=getIntent();
-        String detail=intent.getStringExtra(DETAIL);
-        String name=intent.getStringExtra(NAME);
-        int ImageId=intent.getIntExtra(IMAGE_ID,0);
+        String article_id=intent.getStringExtra(ARTICLE_ID);
+
         Toolbar toolbar=(Toolbar) findViewById(R.id.toolBar);
-        CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
-        ImageView imageView=(ImageView)findViewById(R.id.imageView);
-        TextView textView=(TextView)findViewById(R.id.tv_content);
+
         setSupportActionBar(toolbar);
         ActionBar actionBar=getSupportActionBar();
         if (actionBar!=null){
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        collapsingToolbarLayout.setTitle(name);
-        Glide.with(this).load(ImageId).into(imageView);
-        textView.setText(detail);
 
+        initData();
+    }
+
+    private void initData(){
+        CollapsingToolbarLayout collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing_toolbar);
+        ImageView imageView=(ImageView)findViewById(R.id.imageView);
+        TextView textView=(TextView)findViewById(R.id.tv_content);
+        TextView tv_author=(TextView)findViewById(R.id.tv_author);
+        TextView tv_publishTime=(TextView)findViewById(R.id.tv_publishTime);
+
+        //获取攻略内容Bmob_getArticleInfo_impl
+        //数据：攻略号article_id
+        //根据攻略号获取到对应攻略的标题、图片、发布者、发布时间和发布内容，并设置到下面的界面里
+        //攻略标题
+        collapsingToolbarLayout.setTitle("攻略标题");
+        //发布者
+        tv_author.setText("发布者");
+        //发布时间
+        tv_publishTime.setText("发布时间");
+        //攻略图片
+        Glide.with(this).load("攻略图片").into(imageView);
+        //攻略内容
+        textView.setText("攻略内容");
     }
 
     @Override

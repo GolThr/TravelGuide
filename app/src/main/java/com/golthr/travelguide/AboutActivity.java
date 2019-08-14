@@ -19,6 +19,7 @@ public class AboutActivity extends AppCompatActivity {
      */
 
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(AboutActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
         ImageView gotoIntroduction = (ImageView) findViewById(R.id.gotoIntroduction);

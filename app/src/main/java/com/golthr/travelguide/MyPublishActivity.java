@@ -1,6 +1,5 @@
 package com.golthr.travelguide;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,14 +14,18 @@ public class MyPublishActivity extends AppCompatActivity {
 
     private MyAdapter adapter;
     private RecyclerView mRecyclerView;
-    Student[] students = {new Student(R.drawable.about2, "99999999999", "Cindy", "2019-w1-w1"),
-            new Student(R.drawable.banana_pic, "101", "Lisa", "2019-w1-w1"), new Student(R.drawable.banana_pic, "102323", "Lili", "2019-w1-w1"),
-            new Student(R.drawable.banana_pic, "103", "Jack", "2019-w1-w1"), new Student(R.drawable.banana_pic, "121324", "Jim", "2019-w1-w1"),
-            new Student(R.drawable.banana_pic, "108", "Tom", "2019-w1-w1"), new Student(R.drawable.banana_pic, "1321421", "Mike", "2019-w1-w1")};
+    private Article[] articles ={new Article(R.drawable.about2,"shaaa", "Cindy", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1dght01", "Lisa", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1023rtyh23", "Lili","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"10rht3", "Jack", "2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1rht21324", "Jim","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1hrd08", "Tom","2019-1-1", "100"),
+            new Article(R.drawable.banana_pic,"1rt321421", "Mike","2019-1-1", "100")};
 
     //数据源
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(MyPublishActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview);
         ImageView imageView = (ImageView) findViewById(R.id.iv_back_btn);
@@ -34,14 +37,14 @@ public class MyPublishActivity extends AppCompatActivity {
         });
         TextView tv_title = (TextView)findViewById(R.id.tv_main_title);
         tv_title.setText("我的发布");
-//        students = new ArrayList<Student>();
-//        students.add(new Student(R.drawable.about2,"100", "Cindy", "2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"101", "Lisa", "2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"102323", "Lili","2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"103", "Jack", "2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"121324", "Jim","2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"108", "Tom","2019-w1-w1"));
-//        students.add(new Student(R.drawable.banana_pic,"1321421", "Mike","2019-w1-w1"));
+//        articles = new ArrayList<Article>();
+//        articles.add(new Article(R.drawable.about2,"100", "Cindy", "2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"101", "Lisa", "2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"102323", "Lili","2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"103", "Jack", "2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"121324", "Jim","2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"108", "Tom","2019-w1-w1"));
+//        articles.add(new Article(R.drawable.banana_pic,"1321421", "Mike","2019-w1-w1"));
         mRecyclerView = (RecyclerView) findViewById(R.id.reclcler_view);
         initData();
 
@@ -60,21 +63,21 @@ public class MyPublishActivity extends AppCompatActivity {
 
     }
 
-    //public  ArrayList<Student> initData(){
-//    ArrayList<Student> studentList = new ArrayList<>();
-//    for (int j=0;j<students.length;j++){
-//        studentList.add(students[j]);
+    //public  ArrayList<Article> initData(){
+//    ArrayList<Article> studentList = new ArrayList<>();
+//    for (int j=0;j<articles.length;j++){
+//        studentList.add(articles[j]);
 //    }
 //
 //    return studentList;
 //}
     public void initData() {
-        ArrayList<Student> studentList = new ArrayList<>();
-        for (int j = 0; j < students.length; j++) {
-            studentList.add(students[j]);
+        ArrayList<Article> articleList = new ArrayList<>();
+        for (int j = 0; j < articles.length; j++) {
+            articleList.add(articles[j]);
         }
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyAdapter(MyPublishActivity.this, studentList);
+        adapter = new MyAdapter(MyPublishActivity.this, articleList);
 
         mRecyclerView.setAdapter(adapter);
     }

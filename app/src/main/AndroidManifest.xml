@@ -2,23 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.golthr.travelguide">
-
-    <!--允许程序打开网络套接字-->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!--允许程序设置内置sd卡的写权限-->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--允许程序获取网络状态-->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--允许程序访问WiFi网络信息-->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <!--允许程序读写手机状态和身份-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <!-- 允许程序打开网络套接字 -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序获取网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- 允许程序访问WiFi网络信息 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 允许程序读写手机状态和身份 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- 允许程序访问CellID或WiFi热点来获取粗略的位置 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <uses-permission android:name="android.permission.CAMERA" />
-
-    <!--保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
@@ -29,60 +20,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.golthr.travelguide.BmobContentProvider">
-        </provider>
+            android:authorities="com.golthr.travelguide.BmobContentProvider"></provider>
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
-            android:value="c4e951b19e39c6895e253155685118bd"/>
-        <activity android:name=".MainActivity">
-        </activity>
-        <activity android:name=".FindBackActivity">
-        </activity>
-        <activity android:name=".Home">
-        </activity>
-        <activity android:name=".LoginActivity">
+            android:value="c4e951b19e39c6895e253155685118bd" />
+
+        <activity android:name=".SplashActivity"
+            android:theme="@style/FixSystemWindowTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity">
-        </activity>
-        <activity android:name=".AddRouteActivity">
-        </activity>
-        <activity android:name=".PublishActivity">
-        </activity>
-        <activity android:name=".InformationActivity">
-        </activity>
-        <activity android:name=".PictureActivity">
-        </activity>
-        <activity android:name=".FavoriteActivity">
-        </activity>
-        <activity android:name=".DetailActivity">
-        </activity>
-        <activity android:name=".MyPublishActivity">
-        </activity>
-        <activity android:name=".SettingActivity">
-        </activity>
-        <activity android:name=".SecurityActivity">
-        </activity>
-        <activity android:name=".InformActivity">
-        </activity>
-        <activity android:name=".YinsiActivity">
-        </activity>
-        <activity android:name=".NormalActivity">
-        </activity>
-        <activity android:name=".OtherActivity">
-        </activity>
-        <activity android:name=".AboutActivity">
-        </activity>
-        <activity android:name=".IntroductionActivity">
-        </activity>
-        <activity android:name=".FootActivity">
-        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".FindBackActivity"></activity>
+        <activity android:name=".Home"></activity>
+        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".AddRouteActivity"></activity>
+        <activity android:name=".PublishActivity"></activity>
+        <activity android:name=".InformationActivity"></activity>
+        <activity android:name=".PictureActivity"></activity>
+        <activity android:name=".FavoriteActivity"></activity>
+        <activity android:name=".DetailActivity"></activity>
+        <activity android:name=".MyPublishActivity"></activity>
+        <activity android:name=".SettingActivity"></activity>
+        <activity android:name=".SecurityActivity"></activity>
+        <activity android:name=".InformActivity"></activity>
+        <activity android:name=".YinsiActivity"></activity>
+        <activity android:name=".NormalActivity"></activity>
+        <activity android:name=".OtherActivity"></activity>
+        <activity android:name=".AboutActivity"></activity>
+        <activity android:name=".IntroductionActivity"></activity>
+        <activity android:name=".FootActivity"></activity>
     </application>
 
 </manifest>

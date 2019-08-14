@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
     private MapView mMapView = null;
     private AMap aMap;
     private Bitmap bitmap;
+    private String CURRENT_ADDRESS = "";
     //是否需要检测后台定位权限，设置为true时，如果用户没有给予后台定位权限会弹窗提示
     private boolean needCheckBackLocation = false;
     //如果设置了target > 28，需要增加这个权限，否则不会弹出"始终允许"这个选择框
@@ -69,6 +70,15 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
     private TextView tv_locate;
     private TextView tv_locate_info;
     private LinearLayout ll_get_location;
+
+    private TextView tv_suggestInfo;
+    private TextView tv_foldMore;
+    private TextView tv_route_1;
+    private TextView tv_route_2;
+    private LinearLayout ll_route_more;
+    private TextView tv_evacuation_1;
+    private TextView tv_evacuation_2;
+    private LinearLayout ll_evacuation_more;
 
     //FloatView
     private static final String TAG = "MainActivity";
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
         bitmap = Bitmap.createScaledBitmap(BitmapFactory.decodeResource(getContext().getResources(), R.drawable.ic_locate_poi), 100, 100, true);
         initMap();
         initView();
-
+        initInfo();
     }
 
     private void initMap(){
@@ -170,6 +180,30 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
         mDataRecyclerView = (CustomScrollView) findViewById(R.id.recyclerview_data_list);
     }
 
+    private void initInfo(){
+        tv_suggestInfo = (TextView)findViewById(R.id.tv_suggestInfo);
+        tv_foldMore = (TextView)findViewById(R.id.tv_foldMore);
+        tv_route_1 = (TextView)findViewById(R.id.tv_route_1);
+        tv_route_2 = (TextView)findViewById(R.id.tv_route_2);
+        ll_route_more = (LinearLayout)findViewById(R.id.ll_route_more);
+        tv_evacuation_1 = (TextView)findViewById(R.id.tv_evacuation_1);
+        tv_evacuation_2 = (TextView)findViewById(R.id.tv_evacuation_2);
+        ll_evacuation_more = (LinearLayout)findViewById(R.id.ll_evacuation_more);
+
+
+        //获取景区相关信息Bmob_getInfo_impl
+        //数据：当前地点CURRENT_ADDRESS
+        //获取到数据并将景区介绍放到tv_suggestInfo里，如果不在景区则不要设置介绍文字（避免将默认文字覆盖）
+        //获取到当前景区的推荐游玩路线或攻略，推荐出两条，分别放到tv_route_1和tv_route_2中并分别为其设置点击事件跳转到DetailActivity，并向其传1个名为攻略号的参数，(下面有跳转示例)
+        //      如果仅有2条以内路线，则把其余卡片隐藏掉，展示更多的卡片id为ll_route_more
+        //获取当前景区的逃生路线说明，推荐出两条，分别放到tv_evacuation_1和tv_evacuation_2中并分别为其设置点击事件跳转到DetailActivity，并向其传1个名为逃生路线号的参数（这个数据库没设计），
+        //      如果仅有2条以内路线，则把其余卡片隐藏掉，展示更多的卡片id为ll_evacuation_more
+        //跳转示例(参数变量名不要改)
+        Intent intent=new Intent(MainActivity.this,DetailActivity.class);
+        intent.putExtra(DetailActivity.ARTICLE_ID, "攻略号id");
+        startActivity(intent);
+    }
+
     @Override
     public boolean checkIfIntercept() {
         View firstChild = mDataRecyclerView.getChildAt(0);
@@ -186,7 +220,8 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
         RegeocodeAddress regeocodeAddress = regeocodeResult.getRegeocodeAddress();
         tv_locate.setText(regeocodeAddress.getCity());
-        tv_locate_info.setText("·"+regeocodeAddress.getTownship());
+        CURRENT_ADDRESS = regeocodeAddress.getTownship();
+        tv_locate_info.setText("·" + CURRENT_ADDRESS);
     }
 
     @Override

@@ -54,6 +54,7 @@ public class PictureActivity extends AppCompatActivity {
         setContentView(R.layout.activity_picture);
         initView();
 
+        //修改头像Bmob_modifyHead_impl
         im_back = (ImageView)findViewById(R.id.iv_back_btn);
         im_back.setOnClickListener(new View.OnClickListener() {
             @Override

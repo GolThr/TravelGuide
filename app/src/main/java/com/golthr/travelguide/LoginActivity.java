@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Bmob.initialize(this, "523238cf6b514a3a71a3f0835c606f4e");
 
         if (BmobUser.isLogin()) {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);

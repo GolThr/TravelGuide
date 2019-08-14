@@ -47,6 +47,7 @@ public class PublishActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Affects.setStatusBarFontBlack(PublishActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_publish);
         initView();
