@@ -6,6 +6,15 @@ public class Inform extends BmobUser {
     private String Name;
     private String Address;
     private String Sex;
+    private String Phone;
+
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
 
     public String getName() {
         return Name;

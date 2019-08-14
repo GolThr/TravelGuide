@@ -17,7 +17,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.golthr.travelguide.obj.Inform;
 import com.golthr.travelguide.util.DensityUtil;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class InformationActivity extends AppCompatActivity {
     //Dialog
@@ -25,7 +30,15 @@ public class InformationActivity extends AppCompatActivity {
     private EditText et_new;
     private EditText et_repassword;
     private Button btn_change;
+    private EditText et1;//姓名
+    private EditText et2;//邮箱
+    private EditText et3;//地址
+    private Button btn;//确认
+    String Et1,Et2,Et3;
 
+    final String name = (String) BmobUser.getObjectByKey("Name");
+    final String email = (String) BmobUser.getObjectByKey("Phone");
+    final String address = (String) BmobUser.getObjectByKey("Address");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +70,64 @@ public class InformationActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        et1=(EditText)findViewById(R.id.et1);
+        et2=(EditText)findViewById(R.id.et2);
+        et3=(EditText) findViewById(R.id.et3);
+        btn=(Button)findViewById(R.id.btn_true);
+
+        et1.setText(name);
+        et2.setText(email);
+        et3.setText(address);
+        btn.setOnClickListener(new View.OnClickListener(){ //点击保存，数据传到数据库中。
+            @Override
+            public void onClick(View view) {
+                Et1 = et1.getText().toString().trim();
+                Et2 = et2.getText().toString().trim();
+                Et3 = et3.getText().toString().trim();
+                //else if(!Et2.equals("女")&&!Et2.equals("男")){
+//                    Toast.makeText(InformationActivity.this, "请按要求输入性别", Toast.LENGTH_SHORT).show();
+//                    et2.setText(sex);
+//                    return;
+//                }
+                if (Et1.equals("")) {
+                    Toast.makeText(InformationActivity.this, "请输入姓名", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (Et2.equals("")) {
+                    Toast.makeText(InformationActivity.this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                    return;
+                } else if (Et3.equals("")) {
+                    Toast.makeText(InformationActivity.this, "请输入地址", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (Et1.equals(name) && Et2.equals(email) && Et3.equals(address)) {
+                    Toast.makeText(InformationActivity.this, "您没有做任何修改", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    Inform inform=new Inform();
+
+                    inform.setAddress(Et3);
+                    inform.setSex("女");
+                    inform.setName(Et1);
+                    inform.setPhone(Et2);
+                    System.out.println(inform.getName());
+                    Inform user = BmobUser.getCurrentUser(Inform.class);
+                    inform.update(user.getObjectId(),new UpdateListener() {
+                        @Override
+                        public void done(BmobException e) {
+                            if (e == null) {
+
+                                Toast.makeText(InformationActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                Toast.makeText(InformationActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
     }
 
     private void showBottomDialog() {
