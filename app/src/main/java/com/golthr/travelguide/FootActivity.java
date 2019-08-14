@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FootActivity extends AppCompatActivity {
+import cn.bmob.v3.BmobUser;
 
+public class FootActivity extends AppCompatActivity {
     private MyAdapter adapter;
     private RecyclerView mRecyclerView;
     private Article[] articles ={new Article(R.drawable.about2,"shaaa", "Cindy", "2019-1-1", "100"),
@@ -21,13 +22,15 @@ public class FootActivity extends AppCompatActivity {
             new Article(R.drawable.banana_pic,"1rht21324", "Jim","2019-1-1", "100"),
             new Article(R.drawable.banana_pic,"1hrd08", "Tom","2019-1-1", "100"),
             new Article(R.drawable.banana_pic,"1rt321421", "Mike","2019-1-1", "100")};
-
     //数据源
+
      @Override
     protected void onCreate(Bundle savedInstanceState) {
          Affects.setStatusBarFontBlack(FootActivity.this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recyclerview);
+
+        //标题栏
         ImageView imageView=(ImageView)findViewById(R.id.iv_back_btn);
         imageView.setOnClickListener(new View.OnClickListener() {
              @Override
@@ -37,49 +40,26 @@ public class FootActivity extends AppCompatActivity {
          });
         TextView tv_title = (TextView) findViewById(R.id.tv_main_title);
         tv_title.setText("我的足迹");
-//        articles = new ArrayList<Article>();
-//        articles.add(new Article(R.drawable.about2,"100", "Cindy", "2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"101", "Lisa", "2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"102323", "Lili","2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"103", "Jack", "2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"121324", "Jim","2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"108", "Tom","2019-1-1"));
-//        articles.add(new Article(R.drawable.banana_pic,"1321421", "Mike","2019-1-1"));
         mRecyclerView=(RecyclerView) findViewById(R.id.reclcler_view);
+
         initData();
-
-        // 设置LinearLayoutManager
-//       mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        adapter=new MyAdapter(MainActivity.this,initData());
-
-        // 设置ItemAnimator
-//        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-//        // 设置固定大小
-//        mRecyclerView.setHasFixedSize(true);
-        // 初始化自定义的适配器
-        // 为mRecyclerView设置适配器
-   //     mRecyclerView.setAdapter(adapter);
-
-
-
-
     }
-//public  ArrayList<Article> initData(){
-//    ArrayList<Article> studentList = new ArrayList<>();
-//    for (int j=0;j<articles.length;j++){
-//        studentList.add(articles[j]);
-//    }
-//
-//    return studentList;
-//}
+
     public void initData(){
+        BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+        String userId = user.getObjectId();
+        //获取所有足迹Bmob_getHistory_impl
+        //数据：用户userId
+        //获取到该用户查看攻略的历史记录的信息，并将每个攻略分别存成一个Article对象，存入下面的articleList列表中即可(数据需包括攻略图片1张，攻略标题，攻略简短介绍，攻略作者用户名，攻略发布时间和攻略id号)
+        //注意保存攻略id，每条攻略的点击事件不用设置
         ArrayList<Article> articleList = new ArrayList<>();
-    for (int j = 0; j< articles.length; j++){
-        articleList.add(articles[j]);
-    }
+        for (int j = 0; j< articles.length; j++){
+            articleList.add(articles[j]);
+        }
+        //////////////////
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter=new MyAdapter(FootActivity.this, articleList);
-
         mRecyclerView.setAdapter(adapter);
     }
 

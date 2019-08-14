@@ -48,23 +48,7 @@ public class SplashActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_splash);
         Bmob.initialize(this, "523238cf6b514a3a71a3f0835c606f4e");
-        /*activity继承AppCompatActivity使用getSupportActionBar().hide()来隐藏ActionBar，且
-         * 必须写在 setContentView后面，如果在styles.xml中设置了NoTitleBar就不用写。*/
-        /*getSupportActionBar().hide();*/
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (BmobUser.isLogin()) {
-                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                }
-                SplashActivity.this.finish();
-            }
-        }, 3000);
+
     }
 
 
@@ -99,6 +83,24 @@ public class SplashActivity extends AppCompatActivity {
             if (Build.VERSION.SDK_INT >= 23) {
                 if (isNeedCheck) {
                     checkPermissions(needPermissions);
+                }else {
+                    /*activity继承AppCompatActivity使用getSupportActionBar().hide()来隐藏ActionBar，且
+                     * 必须写在 setContentView后面，如果在styles.xml中设置了NoTitleBar就不用写。*/
+                    /*getSupportActionBar().hide();*/
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (BmobUser.isLogin()) {
+                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                            SplashActivity.this.finish();
+                        }
+                    }, 2000);
                 }
             }
         }catch(Throwable e){

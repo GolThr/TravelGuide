@@ -10,8 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FavoriteActivity extends AppCompatActivity {
+import cn.bmob.v3.BmobUser;
 
+public class FavoriteActivity extends AppCompatActivity {
     private MyAdapter adapter;
     private RecyclerView mRecyclerView;
     private Article[] articles ={new Article(R.drawable.about2,"shaaa", "Cindy", "2019-1-1", "100"),
@@ -45,10 +46,12 @@ public class FavoriteActivity extends AppCompatActivity {
     }
 
     public void initData(){
+        BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+        String userId = user.getObjectId();
         //获取所有收藏Bmob_getFavorite_impl
         //数据：用户userId
         //获取到该用户收藏的所有攻略的信息，并将每个攻略分别存成一个Article对象，存入下面的articleList列表中即可(数据需包括攻略图片1张，攻略标题，攻略简短介绍，攻略作者用户名，攻略发布时间和攻略id号)
-        //注意保存攻略id
+        //注意保存攻略id，每条攻略的点击事件不用设置
         ArrayList<Article> articleList = new ArrayList<>();
         for (int j = 0; j< articles.length; j++){
             articleList.add(articles[j]);

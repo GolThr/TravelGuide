@@ -25,4 +25,13 @@ PictureActivity.java
 1. 修改头像Bmob_modifyHead_impl（安卓版本不兼容图片无法显示和读取）
 
 FavoriteActivity.java
-1. 
+1. 获取所有收藏Bmob_getFavorite_impl
+
+DetailActivity.java
+1. 获取攻略内容Bmob_getArticleInfo_impl
+
+FootActivity.java
+1. 获取所有足迹Bmob_getHistory_impl
+
+MyPublish.java
+1. 获取发布的攻略Bomb_getPublished_impl

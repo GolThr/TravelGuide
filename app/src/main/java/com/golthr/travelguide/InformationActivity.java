@@ -100,8 +100,10 @@ public class InformationActivity extends AppCompatActivity {
         });
 
 
+        BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+        String userId = user.getObjectId();
         //修改资料Bmob_modifyInfo_impl
-        //数据：用户名Et1，性别gender，手机号Et2，地址Et3
+        //数据：用户userId，用户名Et1，性别gender，手机号Et2，地址Et3
         btn.setOnClickListener(new View.OnClickListener(){ //点击保存，数据传到数据库中。
             @Override
             public void onClick(View view) {

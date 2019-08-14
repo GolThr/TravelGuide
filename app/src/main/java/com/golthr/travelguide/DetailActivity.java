@@ -12,6 +12,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import cn.bmob.v3.BmobUser;
+
 public class DetailActivity extends AppCompatActivity {
     public static final String ARTICLE_ID = "article_id";
 
@@ -44,9 +46,12 @@ public class DetailActivity extends AppCompatActivity {
         TextView tv_author=(TextView)findViewById(R.id.tv_author);
         TextView tv_publishTime=(TextView)findViewById(R.id.tv_publishTime);
 
+        BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+        String userId = user.getObjectId();
         //获取攻略内容Bmob_getArticleInfo_impl
-        //数据：攻略号article_id
+        //数据：用户userId，攻略号article_id
         //根据攻略号获取到对应攻略的标题、图片、发布者、发布时间和发布内容，并设置到下面的界面里
+        //每次都要保存一次记录在相应的用户中，作为历史记录（注：连续两次打开相同的攻略算一次记录）
         //攻略标题
         collapsingToolbarLayout.setTitle("攻略标题");
         //发布者
