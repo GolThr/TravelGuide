@@ -7,111 +7,114 @@
     android:id="@+id/activity_register"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <include layout="@layout/title_bar_default" /><!--引入标题栏-->
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:orientation="vertical">
-
-        <!--输入框-->
-        <EditText
-            android:id="@+id/et_username"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:hint="请输入用户名"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textColorHint="#a3a3a3"
-            android:textSize="14sp"
-            android:background="@drawable/back_input"/>
-        <EditText
-            android:id="@+id/et_email"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="20dp"
-            android:hint="请输入邮箱"
-            android:inputType="textEmailAddress"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textColorHint="#a3a3a3"
-            android:textSize="14sp"
-            android:background="@drawable/back_input"/>
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:orientation="vertical">
 
+            <!--输入框-->
             <EditText
-                android:id="@+id/et_verifyCode"
-                android:layout_width="0dp"
+                android:id="@+id/et_username"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="4"
-                android:hint="请输入验证码"
-                android:inputType="number"
-                android:maxLength="4"
+                android:layout_marginTop="20dp"
+                android:hint="请输入用户名"
+                android:inputType="textEmailAddress"
                 android:paddingLeft="8dp"
-                android:layout_marginRight="10dp"
                 android:singleLine="true"
                 android:textColor="#000000"
                 android:textColorHint="#a3a3a3"
                 android:textSize="14sp"
                 android:background="@drawable/back_input"/>
-            <Button
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/et_email"
+                android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_weight="3"
-                android:text="获取验证码"
-                android:background="@drawable/back_button_main"/>
+                android:layout_marginTop="20dp"
+                android:hint="请输入邮箱"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#a3a3a3"
+                android:textSize="14sp"
+                android:background="@drawable/back_input"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+
+                <EditText
+                    android:id="@+id/et_verifyCode"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="4"
+                    android:hint="请输入验证码"
+                    android:inputType="number"
+                    android:maxLength="4"
+                    android:paddingLeft="8dp"
+                    android:layout_marginRight="10dp"
+                    android:singleLine="true"
+                    android:textColor="#000000"
+                    android:textColorHint="#a3a3a3"
+                    android:textSize="14sp"
+                    android:background="@drawable/back_input"/>
+                <Button
+                    android:id="@+id/btn_getVerifyCode"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="3"
+                    android:text="获取验证码"
+                    android:background="@drawable/back_button_main"/>
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/et_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:hint="请设置6~16位新密码"
+                android:inputType="textPassword"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#a3a3a3"
+                android:maxLength="16"
+                android:textSize="14sp"
+                android:background="@drawable/back_input" />
+            <EditText
+                android:id="@+id/et_rePWD"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="25dp"
+                android:hint="请再次输入密码"
+                android:inputType="textPassword"
+                android:paddingLeft="8dp"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textColorHint="#a3a3a3"
+                android:textSize="14sp"
+                android:background="@drawable/back_input" />
+            <!--按钮-->
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/back_button_main"
+                android:text="注册"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
 
         </LinearLayout>
-        <EditText
-            android:id="@+id/et_pwd"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:hint="请输入密码"
-            android:inputType="textPassword"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textColorHint="#a3a3a3"
-            android:textSize="14sp"
-            android:background="@drawable/back_input" />
-        <EditText
-            android:id="@+id/et_rePWD"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="25dp"
-            android:hint="请再次输入密码"
-            android:inputType="textPassword"
-            android:paddingLeft="8dp"
-            android:singleLine="true"
-            android:textColor="#000000"
-            android:textColorHint="#a3a3a3"
-            android:textSize="14sp"
-            android:background="@drawable/back_input" />
-        <!--按钮-->
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/back_button_main"
-            android:text="注册"
-            android:textColor="@android:color/black"
-            android:textSize="18sp"/>
-
-    </LinearLayout>
 
 </LinearLayout>

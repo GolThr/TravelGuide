@@ -49,4 +49,11 @@ public class Affects {
         matcher=pattern.matcher(email);
         return matcher.matches();
     }
+
+    public static String sendEmailVerifyCode(String email){
+        //发送验证码Bmob_sendEmailVerifyCode_impl
+        //数据：邮箱email
+        //发送验证码并return验证码
+        return "1234";
+    }
 }
