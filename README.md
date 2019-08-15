@@ -38,3 +38,10 @@ MyPublish.java
 
 PublishActivity.java
 1. 发布攻略Bmob_publishArticle_impl
+
+AddRouteActivity.java
+1. 规划行程Bmob_planingTrip_impl
+2. 获取最推荐的景区Bmob_popularAttraction_impl
+
+AboutActivity.java
+1. 检测新版本Bmob_checkUpdate_impl

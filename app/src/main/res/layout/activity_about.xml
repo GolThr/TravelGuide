@@ -32,6 +32,7 @@
         android:layout_gravity="center"
         />
     <RelativeLayout
+        android:id="@+id/rl_checkUpdate"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
@@ -39,6 +40,7 @@
         android:background="#ffffff"
         >
         <TextView
+            android:id="@+id/tv_update_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="版本更新"
@@ -49,9 +51,21 @@
            />
 
         <TextView
+            android:id="@+id/tv_currentVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="1.0.0"
+            android:gravity="left|center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_update_title"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-          android:layout_centerVertical="true"
+            android:layout_centerVertical="true"
             android:text="已是最新版本"
             android:gravity="right"
             android:textSize="15sp"
@@ -82,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="11111@qq.com"
+            android:text="1344006993@qq.com"
             android:gravity="right"
             android:textSize="15sp"
             android:layout_marginRight="10dp"
@@ -90,6 +104,7 @@
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
     <RelativeLayout
+        android:id="@+id/gotoIntroduction"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
@@ -110,11 +125,9 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/g3"
-            android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_centerInParent="true"
-            android:id="@+id/gotoIntroduction"
             />
     </RelativeLayout>
 
