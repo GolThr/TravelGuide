@@ -9,16 +9,23 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.golthr.travelguide.util.DensityUtil;
 
 import java.io.File;
@@ -26,9 +33,15 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import cn.bmob.v3.BmobUser;
+
 
 public class PublishActivity extends AppCompatActivity {
     private ImageView im_more;
+    private EditText et_article;
+    private TextView tv_myLocation;
+    private ImageView iv_back_btn;
+    private RelativeLayout rl_getLocation;
 
     //head
     private ImageView iv_func_btn_main;
@@ -38,12 +51,60 @@ public class PublishActivity extends AppCompatActivity {
     //Dialog
     private TextView tv_take_photo;
     private TextView tv_gallery;
+    private EditText et_article_title;
+    private Button btn_publish;
 
     private ImageView ivHead;//头像显示
     private TextView btnTakephoto;//拍照
     private TextView btnPhotos;//相册
     private Bitmap head;//头像Bitmap
     private static String path = "/sdcard/DemoHead/";
+
+    //数据
+    private String article = "";
+    private String location = "";
+    private String title = "";
+
+    //定位
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient = null;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener = new AMapLocationListener() {
+        @Override
+        public void onLocationChanged(AMapLocation aMapLocation) {
+            if (aMapLocation != null) {
+                if (aMapLocation.getErrorCode() == 0) {
+                    //可在其中解析amapLocation获取相应内容。
+                    System.out.println(aMapLocation.getLocationType());//获取当前定位结果来源，如网络定位结果，详见定位类型表
+                    System.out.println(aMapLocation.getLatitude());//获取纬度
+                    System.out.println(aMapLocation.getLongitude());//获取经度
+                    System.out.println(aMapLocation.getAccuracy());//获取精度信息
+                    System.out.println(aMapLocation.getAddress());//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+                    System.out.println(aMapLocation.getCountry());//国家信息
+                    System.out.println(aMapLocation.getProvince());//省信息
+                    System.out.println(aMapLocation.getCity());//城市信息
+                    System.out.println(aMapLocation.getDistrict());//城区信息
+                    System.out.println(aMapLocation.getStreet());//街道信息
+                    System.out.println(aMapLocation.getStreetNum());//街道门牌号信息
+                    System.out.println(aMapLocation.getCityCode());//城市编码
+                    System.out.println(aMapLocation.getAdCode());//地区编码
+                    System.out.println(aMapLocation.getAoiName());//获取当前定位点的AOI信息
+                    System.out.println(aMapLocation.getBuildingId());//获取当前室内定位的建筑物Id
+                    System.out.println(aMapLocation.getFloor());//获取当前室内定位的楼层
+                    System.out.println(aMapLocation.getGpsAccuracyStatus());//获取GPS的当前状态
+                    if(tv_myLocation != null){
+                        location = aMapLocation.getAoiName();
+                        tv_myLocation.setText(location);
+                    }
+                }else {
+                    //定位失败时，可通过ErrCode（错误码）信息来确定失败的原因，errInfo是错误信息，详见错误码表。
+                    Log.e("AmapError","location Error, ErrCode:" + aMapLocation.getErrorCode() + ", errInfo:" + aMapLocation.getErrorInfo());
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,15 +127,46 @@ public class PublishActivity extends AppCompatActivity {
         tv_func.setVisibility(View.VISIBLE);
         tv_main_title.setText("发布攻略");
         tv_func.setText("发布");
+        iv_back_btn = (ImageView)findViewById(R.id.iv_back_btn);
+        et_article = (EditText)findViewById(R.id.et_article);
+        tv_myLocation = (TextView)findViewById(R.id.tv_myLocation);
+        rl_getLocation = (RelativeLayout)findViewById(R.id.rl_getLocation);
+
+        iv_back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         tv_func.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(PublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
-                finish();
+                article = et_article.getText().toString().trim();
+
+                if(!article.equals("")){
+                    if(!location.equals("")){
+                        showPublishDialog();
+                    }else {
+                        Toast.makeText(PublishActivity.this, "请输入设置您的位置", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    Toast.makeText(PublishActivity.this, "请输入攻略内容", Toast.LENGTH_SHORT).show();
+                }
             }
         });
+
+        rl_getLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
+                initLocation();
+            }
+        });
+
+        initLocation();
     }
+
     private void initView() {
         ivHead = (ImageView) findViewById(R.id.picture);
         Bitmap bt = BitmapFactory.decodeFile(path + "head.jpg");//从Sd中找头像，转换成Bitmap
@@ -84,6 +176,39 @@ public class PublishActivity extends AppCompatActivity {
         } else {
             //如果本地没有头像图片则从服务器取头像，然后保存在SD卡中，本Demo的网络请求头像部分忽略
         }
+    }
+
+    private void initLocation(){
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setLocationPurpose(AMapLocationClientOption.AMapLocationPurpose.SignIn);
+        if(null != mLocationClient){
+            mLocationClient.setLocationOption(mLocationOption);
+            //设置场景模式后最好调用一次stop，再调用start以保证场景模式生效
+            mLocationClient.stopLocation();
+            mLocationClient.startLocation();
+        }
+        //设置定位模式为AMapLocationMode.Battery_Saving，低功耗模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Battery_Saving);
+        //获取一次定位结果：
+        //该方法默认为false。
+        mLocationOption.setOnceLocation(true);
+        //获取最近3s内精度最高的一次定位结果：
+        //设置setOnceLocationLatest(boolean b)接口为true，启动定位时SDK会返回最近3s内精度最高的一次定位结果。如果设置其为true，setOnceLocation(boolean b)接口也会被设置为true，反之不会，默认为false。
+        mLocationOption.setOnceLocationLatest(true);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //关闭缓存机制
+        mLocationOption.setLocationCacheEnable(false);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -125,7 +250,42 @@ public class PublishActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    private void showPublishDialog() {
+        final Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_set_title, null);
+        bottomDialog.setContentView(contentView);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
+        params.width = getResources().getDisplayMetrics().widthPixels - DensityUtil.dp2px(this, 16f);
+        params.bottomMargin = DensityUtil.dp2px(this, 8f);
+        contentView.setLayoutParams(params);
+        bottomDialog.getWindow().setGravity(Gravity.BOTTOM);
+        bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+        bottomDialog.show();
 
+        Window window = bottomDialog.getWindow();
+        et_article_title = (EditText)window.findViewById(R.id.et_article_title);
+        btn_publish = (Button)window.findViewById(R.id.btn_publish);
+
+        //发布攻略Bmob_publishArticle_impl
+        //数据：用户userId，攻略内容article，图片images，位置location
+        btn_publish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                BmobUser user = BmobUser.getCurrentUser(BmobUser.class);
+                String userId = user.getObjectId();
+                String title = et_article_title.getText().toString().trim();
+
+                if(!title.equals("")){
+                    //发布攻略
+
+                    Toast.makeText(PublishActivity.this, "发布成功", Toast.LENGTH_SHORT).show();
+                    finish();
+                }else {
+                    Toast.makeText(PublishActivity.this, "请输入攻略标题", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
 
     /**
      * 调用系统的裁剪
@@ -174,7 +334,6 @@ public class PublishActivity extends AppCompatActivity {
 
         }
     }
-
 
     private void showBottomDialog() {
         final Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
@@ -226,5 +385,11 @@ public class PublishActivity extends AppCompatActivity {
                 bottomDialog.hide();
             }
         });
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stopLocation();//停止定位后，本地定位服务并不会被销毁
     }
 }

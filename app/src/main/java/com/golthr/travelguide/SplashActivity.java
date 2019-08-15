@@ -34,8 +34,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        if(Build.VERSION.SDK_INT > 28
-                && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
+        if(Build.VERSION.SDK_INT > 28 && getApplicationContext().getApplicationInfo().targetSdkVersion > 28) {
             needPermissions = new String[] {
                     Manifest.permission.ACCESS_COARSE_LOCATION,
                     Manifest.permission.ACCESS_FINE_LOCATION,
@@ -80,6 +79,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onResume() {
         try{
             super.onResume();
+            checkPermissions(needPermissions);
             if (Build.VERSION.SDK_INT >= 23) {
                 if (isNeedCheck) {
                     checkPermissions(needPermissions);

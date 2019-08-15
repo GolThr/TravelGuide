@@ -35,3 +35,6 @@ FootActivity.java
 
 MyPublish.java
 1. 获取发布的攻略Bomb_getPublished_impl
+
+PublishActivity.java
+1. 发布攻略Bmob_publishArticle_impl
