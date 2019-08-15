@@ -27,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
@@ -35,6 +36,7 @@ import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.services.core.LatLonPoint;
+import com.amap.api.services.geocoder.AoiItem;
 import com.amap.api.services.geocoder.GeocodeResult;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.amap.api.services.geocoder.RegeocodeAddress;
@@ -220,7 +222,14 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
     public void onRegeocodeSearched(RegeocodeResult regeocodeResult, int i) {
         RegeocodeAddress regeocodeAddress = regeocodeResult.getRegeocodeAddress();
         tv_locate.setText(regeocodeAddress.getCity());
-        CURRENT_ADDRESS = regeocodeAddress.getTownship();
+        List<AoiItem> list = regeocodeAddress.getAois();
+        CURRENT_ADDRESS = list.get(0).getAoiName();
+
+        System.out.println("getAois---------------------------------------------------------------------------");
+        for(AoiItem aoi : list){
+            System.out.println(aoi.getAoiName());
+        }
+
         tv_locate_info.setText("·" + CURRENT_ADDRESS);
     }
 

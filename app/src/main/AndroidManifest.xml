@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.golthr.travelguide">
-
     <!-- 允许程序打开网络套接字 -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- 允许程序设置内置sd卡的写权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 允许程序获取网络状态 -->
@@ -13,7 +12,6 @@
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 保持CPU 运转，屏幕和键盘灯有可能是关闭的,用于文件上传和下载 -->
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -22,16 +20,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".PlanResultActivity"></activity>
 
         <provider
             android:name="cn.bmob.v3.util.BmobContentProvider"
-            android:authorities="com.golthr.travelguide.BmobContentProvider"></provider>
+            android:authorities="com.golthr.travelguide.BmobContentProvider" />
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c4e951b19e39c6895e253155685118bd" />
 
-        <activity android:name=".SplashActivity"
+        <activity
+            android:name=".SplashActivity"
             android:theme="@style/FixSystemWindowTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,27 +39,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".FindBackActivity"></activity>
-        <activity android:name=".Home"></activity>
-        <activity android:name=".LoginActivity"></activity>
-        <activity android:name=".RegisterActivity"></activity>
-        <activity android:name=".AddRouteActivity"></activity>
-        <activity android:name=".PublishActivity"></activity>
-        <activity android:name=".InformationActivity"></activity>
-        <activity android:name=".PictureActivity"></activity>
-        <activity android:name=".FavoriteActivity"></activity>
-        <activity android:name=".DetailActivity"></activity>
-        <activity android:name=".MyPublishActivity"></activity>
-        <activity android:name=".SettingActivity"></activity>
-        <activity android:name=".SecurityActivity"></activity>
-        <activity android:name=".InformActivity"></activity>
-        <activity android:name=".YinsiActivity"></activity>
-        <activity android:name=".NormalActivity"></activity>
-        <activity android:name=".OtherActivity"></activity>
-        <activity android:name=".AboutActivity"></activity>
-        <activity android:name=".IntroductionActivity"></activity>
-        <activity android:name=".FootActivity"></activity>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".FindBackActivity" />
+        <activity android:name=".Home" />
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".RegisterActivity" />
+        <activity android:name=".AddRouteActivity" />
+        <activity android:name=".PublishActivity" />
+        <activity android:name=".InformationActivity" />
+        <activity android:name=".PictureActivity" />
+        <activity android:name=".FavoriteActivity" />
+        <activity android:name=".DetailActivity" />
+        <activity android:name=".MyPublishActivity" />
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".SecurityActivity" />
+        <activity android:name=".InformActivity" />
+        <activity android:name=".YinsiActivity" />
+        <activity android:name=".NormalActivity" />
+        <activity android:name=".OtherActivity" />
+        <activity android:name=".AboutActivity" />
+        <activity android:name=".IntroductionActivity" />
+        <activity android:name=".FootActivity" />
     </application>
 
 </manifest>
