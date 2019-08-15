@@ -149,8 +149,6 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
     }
 
     private void initView(){
-//        iv_mine_btn = (ImageView)findViewById(R.id.iv_mine_btn);
-//        iv_add_btn = (ImageView)findViewById(R.id.iv_add_btn);
         tv_locate = (TextView)findViewById(R.id.tv_locate);
         tv_locate_info = (TextView)findViewById(R.id.tv_locate_info);
         ll_get_location = (LinearLayout)findViewById(R.id.ll_get_location);
@@ -163,17 +161,6 @@ public class MainActivity extends AppCompatActivity implements AMap.CancelableCa
                 initMap();
             }
         });
-        //AddTour
-//        iv_add_btn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent toAddRouteIntent = new Intent(MainActivity.this, AddRouteActivity.class);
-//                startActivity(toAddRouteIntent);
-//            }
-//        });
-        //Mine
-
-
         //FloatViewInit
         mDataContainerLayout = (RelativeLayout) findViewById(R.id.rl_data_content_layout);
         mSlideContentLayout = (SlideContentLayout) findViewById(R.id.slide_layout);
