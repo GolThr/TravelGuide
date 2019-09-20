@@ -1,14 +1,22 @@
 package com.golthr.travelguide;
 //登录界面
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.golthr.travelguide.util.DensityUtil;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
@@ -23,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView tv_register;
     private TextView tv_forgotPWD;
+
+    //Dialog
+    private TextView show_tip_content;
+    private Button btn_read_tip;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -40,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             initView();
         }
 
+        showTipDialog("默认账号: 123456789@163.com\n      密  码: 123456");
     }
 
     //获取界面控件
@@ -91,6 +104,40 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent go_forgotPWD = new Intent(LoginActivity.this, FindBackActivity.class);
                 startActivity(go_forgotPWD);
+            }
+        });
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+            LoginActivity.this.finish();
+        }
+        return true;
+    }
+
+    private void showTipDialog(String tips) {
+        final Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_show_tip, null);
+        bottomDialog.setContentView(contentView);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
+        params.width = getResources().getDisplayMetrics().widthPixels - DensityUtil.dp2px(this, 16f);
+        params.bottomMargin = DensityUtil.dp2px(this, 8f);
+        contentView.setLayoutParams(params);
+        bottomDialog.getWindow().setGravity(Gravity.BOTTOM);
+        bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+        bottomDialog.show();
+
+        Window window = bottomDialog.getWindow();
+        show_tip_content = (TextView) window.findViewById(R.id.show_tip_content);
+        btn_read_tip = (Button)window.findViewById(R.id.btn_read_tip);
+
+        show_tip_content.setText(tips);
+
+        btn_read_tip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomDialog.hide();
             }
         });
     }

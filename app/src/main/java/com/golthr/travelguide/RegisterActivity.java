@@ -1,6 +1,7 @@
 package com.golthr.travelguide;
 //注册界面
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -8,7 +9,11 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.golthr.travelguide.obj.Inform;
+import com.golthr.travelguide.util.DensityUtil;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -43,7 +49,11 @@ public class RegisterActivity extends AppCompatActivity {
     private ImageView iv_back_btn;
     private TextView tv_main_title;
 
-    private String VERIFY_CODE = "1234";
+    //Dialog
+    private TextView show_tip_content;
+    private Button btn_read_tip;
+
+    private String VERIFY_CODE = "7849";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         initView();
+        showTipDialog("为了方便您的测试与使用，\n我们将邮箱验证码默认设置为7849。");
     }
 
     private void initView() {
@@ -117,6 +128,32 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+    }
+
+    private void showTipDialog(String tips) {
+        final Dialog bottomDialog = new Dialog(this, R.style.BottomDialog);
+        View contentView = LayoutInflater.from(this).inflate(R.layout.dialog_show_tip, null);
+        bottomDialog.setContentView(contentView);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) contentView.getLayoutParams();
+        params.width = getResources().getDisplayMetrics().widthPixels - DensityUtil.dp2px(this, 16f);
+        params.bottomMargin = DensityUtil.dp2px(this, 8f);
+        contentView.setLayoutParams(params);
+        bottomDialog.getWindow().setGravity(Gravity.BOTTOM);
+        bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
+        bottomDialog.show();
+
+        Window window = bottomDialog.getWindow();
+        show_tip_content = (TextView)window.findViewById(R.id.show_tip_content);
+        btn_read_tip = (Button)window.findViewById(R.id.btn_read_tip);
+
+        show_tip_content.setText(tips);
+
+        btn_read_tip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bottomDialog.hide();
             }
         });
     }

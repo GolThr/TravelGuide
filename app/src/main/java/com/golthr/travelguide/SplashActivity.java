@@ -30,6 +30,8 @@ public class SplashActivity extends AppCompatActivity {
     private static String BACK_LOCATION_PERMISSION = "android.permission.ACCESS_BACKGROUND_LOCATION";
     private UiSettings mUiSettings;//定义一个UiSettings对象
 
+    private int startCnt = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,20 +89,24 @@ public class SplashActivity extends AppCompatActivity {
                     /*activity继承AppCompatActivity使用getSupportActionBar().hide()来隐藏ActionBar，且
                      * 必须写在 setContentView后面，如果在styles.xml中设置了NoTitleBar就不用写。*/
                     /*getSupportActionBar().hide();*/
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            if (BmobUser.isLogin()) {
-                                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                finish();
-                            } else {
-                                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
-                                startActivity(intent);
+                    if(startCnt == 0){
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (BmobUser.isLogin()) {
+                                    Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                } else {
+                                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                                SplashActivity.this.finish();
                             }
-                            SplashActivity.this.finish();
-                        }
-                    }, 2000);
+                        }, 2000);
+                        startCnt++;
+                    }
                 }
             }
         }catch(Throwable e){

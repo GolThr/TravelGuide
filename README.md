@@ -28,7 +28,10 @@ FavoriteActivity.java
 1. 获取所有收藏Bmob_getFavorite_impl
 
 DetailActivity.java
-1. 获取攻略内容Bmob_getArticleInfo_impl
+1. 获取攻略内容及是否收藏Bmob_getArticleInfo_impl
+2. 添加收藏Bmob_addFav_impl
+3. 取消收藏Bmob_delFav_impl
+4. 添加足迹Bmob_addFoot_impl
 
 FootActivity.java
 1. 获取所有足迹Bmob_getHistory_impl

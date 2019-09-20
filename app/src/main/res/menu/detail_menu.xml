@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/add_fav_btn"
+        android:icon="@drawable/ic_add_fav"
+        android:orderInCategory="90"
+        android:title="收藏"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/del_fav_btn"
+        android:icon="@drawable/ic_del_fav"
+        android:orderInCategory="90"
+        android:title="收藏"
+        app:showAsAction="ifRoom"
+        android:visible="false"/>
+</menu>
